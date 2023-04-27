@@ -1290,6 +1290,11 @@ func (v Value) CalledFunctionType() (t Type) {
 	return
 }
 
+func (v Value) GetFunctionType() (t Type) {
+	t.C = C.LLVMGetFunctionType(v.C);
+	return
+}
+
 // Operations on call instructions (only)
 func (v Value) IsTailCall() bool    { return C.LLVMIsTailCall(v.C) != 0 }
 func (v Value) SetTailCall(is bool) { C.LLVMSetTailCall(v.C, boolToLLVMBool(is)) }

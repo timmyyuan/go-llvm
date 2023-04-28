@@ -11,15 +11,23 @@
 //===----------------------------------------------------------------------===//
 
 #include "SupportBindings.h"
+#include "llvm/ADT/StringRef.h"
 #include "llvm/Support/DynamicLibrary.h"
+#include "llvm/Support/Signals.h"
 #include <stdlib.h>
 #include <string.h>
 
+using namespace llvm;
+
 void LLVMLoadLibraryPermanently2(const char *Filename, char **ErrMsg) {
   std::string ErrMsgStr;
-  if (llvm::sys::DynamicLibrary::LoadLibraryPermanently(Filename, &ErrMsgStr)) {
+  if (sys::DynamicLibrary::LoadLibraryPermanently(Filename, &ErrMsgStr)) {
     *ErrMsg = static_cast<char *>(malloc(ErrMsgStr.size() + 1));
     memcpy(static_cast<void *>(*ErrMsg),
            static_cast<const void *>(ErrMsgStr.c_str()), ErrMsgStr.size() + 1);
   }
+}
+
+void LLVMPrintStackTraceOnErrorSignal(const char *Argv0) {
+  sys::PrintStackTraceOnErrorSignal(Argv0);
 }

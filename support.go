@@ -51,3 +51,10 @@ func ParseCommandLineOptions(args []string, overview string) {
 	defer C.free(unsafe.Pointer(overviewstr))
 	C.LLVMParseCommandLineOptions(C.int(len(args)), &argstrs[0], overviewstr)
 }
+
+
+func PrintStackTraceOnErrorSignal(argv0 string) {
+	argv0Str := C.CString(argv0)
+	defer C.free(unsafe.Pointer(argv0Str))
+	C.LLVMPrintStackTraceOnErrorSignal(argv0Str)
+}

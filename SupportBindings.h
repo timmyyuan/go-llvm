@@ -22,6 +22,8 @@ extern "C" {
 // message.
 void LLVMLoadLibraryPermanently2(const char *Filename, char **ErrMsg);
 
+void LLVMPrintStackTraceOnErrorSignal(const char *Argv0);
+
 #ifdef __cplusplus
 }
 #endif

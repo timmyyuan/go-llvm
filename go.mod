@@ -1,3 +1,3 @@
-module github.com/timmyyyuan/go-llvm
+module github.com/timmyyuan/go-llvm
 
 go 1.14
